@@ -1,0 +1,13 @@
+
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ
+=
+java:S1905"'Remove this unnecessary cast to "Page".( ‰¾½
+S
+java:S1612"=Replace this lambda with method reference 'CategoryDTO::new'.(ü™Ë
+^
+java:S1128"HRemove this unused import 'org.springframework.data.domain.PageRequest'.(ºêâÚ
+F
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ
+S
+java:S1128"8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ

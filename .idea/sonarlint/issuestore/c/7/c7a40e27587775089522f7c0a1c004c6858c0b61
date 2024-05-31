@@ -1,0 +1,15 @@
+
+…
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ8„‡å³ú1J$cc9ec49a-3201-4190-809a-de992dd61cf7
+…
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ8…‡å³ú1J$7994679f-a57b-41e9-b4cc-adcb63aff03d
+j
+java:S1905#"'Remove this unnecessary cast to "Page".(óÝåé8Œ‡å³ú1J$61c79d72-9b33-476a-992d-e39c3e661b3a
+„
+java:S1612$"<Replace this lambda with method reference 'ProductDTO::new'.(“„ÿ¶ûÿÿÿÿ8‡å³ú1J$50d165fe-4932-494d-b75e-a4007351f8bd
+ƒ	java:S1258"<This block of commented-out lines of code should be removed.(èµ¤œùÿÿÿÿ8—‡å³ú1J$2d2ece34-6b00-4587-aa26-48fb8fa47e02
+ƒ	java:S125B"<This block of commented-out lines of code should be removed.(Œ™ÿìøÿÿÿÿ8ÑÅç¸ú1J$f52ea607-b14a-45d0-b266-7aeb4b299a4c
+–
+java:S1128"SRemove this unused import 'org.springframework.dao.EmptyResultDataAccessException'.(´¶ò®8„žà¸ú1J$c6c2cdff-2763-45d8-aa1c-87ea50ebefcf
+‹
+java:S1128"HRemove this unused import 'org.springframework.data.domain.PageRequest'.(ºêâÚ8…žà¸ú1J$f5f27a0c-cf64-4438-9a1a-7490c8567600
