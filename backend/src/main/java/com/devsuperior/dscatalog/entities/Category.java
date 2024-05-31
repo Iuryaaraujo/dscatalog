@@ -60,12 +60,16 @@ public class Category {
         return updatedAt;
     }
 
+    public Set<Product> getProducts() {
+        return products;
+    }
+
     /*
-    @PrePersist
-Como o nome sugere; Ele é executado logo antes da entidade associada ser
-salva pela primeira vez no banco de dados.
-Se houver transações que desejamos realizar neste momento, este método resolverá o problema.
-     */
+        @PrePersist
+    Como o nome sugere; Ele é executado logo antes da entidade associada ser
+    salva pela primeira vez no banco de dados.
+    Se houver transações que desejamos realizar neste momento, este método resolverá o problema.
+         */
     // Salva o momento que foi criado
     @PrePersist
     public void prePersist() {
