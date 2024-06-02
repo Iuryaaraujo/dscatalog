@@ -1,40 +1,43 @@
-package com.devsuperior.dscatalog.entities;
+package com.devsuperior.dscatalog.dto;
 
-import jakarta.persistence.*;
+import com.devsuperior.dscatalog.entities.User;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
-@Entity
-@Table(name = "tb_user")
-public class User {
+public class UserDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Campo obrigatório")
     private String firstName;
     private String lastName;
-
-    @Column(unique = true)
+    @Email(message = "Favor entrar um entrar um email válido")
     private String email;
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER) // Usuario ja vem os roles junto com ele
-    @JoinTable(name = "tb_user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    Set<RoleDTO> roles = new HashSet<>();
 
-    public User() {
+    public UserDTO() {
     }
 
-    public User(Long id, String firstName, String lastName, String email, String password) {
+    public UserDTO(Long id, String firstName, String lastName, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
+    }
+
+    // converti entidade para DTO
+    public UserDTO(User entity) {
+        id = entity.getId();
+        firstName = entity.getLastName();
+        lastName = entity.getLastName();
+        email = entity.getEmail();
+        // Acessa a lista de Roles que ta dentro do User
+        entity.getRoles().forEach(roles -> this.roles.add(new RoleDTO(roles)));
     }
 
     public Long getId() {
@@ -77,20 +80,7 @@ public class User {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
+    public Set<RoleDTO> getRoles() {
         return roles;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
     }
 }
