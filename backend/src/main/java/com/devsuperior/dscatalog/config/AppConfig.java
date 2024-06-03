@@ -7,7 +7,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 public class AppConfig {
 
-    // deixando a senha com segurança
+    //Bean para criptografar
+    // Bean é para método - componenete gerenciado pelo SpringBoot
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
