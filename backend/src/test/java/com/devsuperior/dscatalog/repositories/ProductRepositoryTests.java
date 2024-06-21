@@ -70,7 +70,7 @@ public class ProductRepositoryTests {
         Assertions.assertTrue(result.isEmpty());
     }
 
-    // delete deve lançar exceção de acesso a dados de resultado vazio quando o ID não existe
+    // delete deve lançar exceção quando o ID não existe
 //    @Test
 //    public void deleteShouldThrowEmptyResultDataAccessExceptionWhenIdDoesNotExist() {
 //        Assertions.assertThrows(EmptyResultDataAccessException.class, () -> {

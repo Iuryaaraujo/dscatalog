@@ -1,5 +1,6 @@
 package com.devsuperior.dscatalog.entities;
 
+import com.devsuperior.dscatalog.projections.IdProjection;
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -9,11 +10,12 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_product")
-public class Product {
+public class Product implements IdProjection<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
     // para aceitar TEXTO mais longo
     @Column(columnDefinition = "TEXT")
     private String description;
@@ -21,6 +23,7 @@ public class Product {
     private String imgUrl;
 
     // Sempre que for usa uma data colocar esse anotetion
+    // TIMESTAMP SEM FUSO HORÁRIO
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant date;
 
@@ -28,7 +31,7 @@ public class Product {
     @JoinTable(name = "tb_product_category",
     joinColumns = @JoinColumn(name = "product_id"),
     inverseJoinColumns = @JoinColumn(name = "category_id"))
-    Set<Category> categories = new HashSet<>();
+    Set<Category> categories = new HashSet<>(); // não colocar no construtor e retira o set
 
     public Product() {
     }

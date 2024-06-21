@@ -17,7 +17,6 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -34,8 +33,7 @@ public class ProductServiceTests {
     @InjectMocks // Não injeta todas as dependencia como @Autowired
     private ProductService service;
 
-    @Mock // Usa quando a classe de teste
-    // não carrega o contexto da aplicação. È mais rápido e enxuto.
+    @Mock // Quando criar o mock, tem que recria o comportamento dele
     private ProductRepository repository;
 
     @Mock
@@ -121,7 +119,7 @@ public class ProductServiceTests {
 
         Pageable pageable = PageRequest.of(0, 10);
 
-        Page<ProductDTO> result = service.findAllPaged(pageable);
+        Page<ProductDTO> result = service.findAllPaged(name, categoryId, pageable);
 
         Assertions.assertNotNull(result);
         Mockito.verify(repository, Mockito.times(1)).findAll(pageable);
@@ -150,11 +148,12 @@ public class ProductServiceTests {
     //delete não deve fazer nada quando o ID existir
     @Test
     public void deleteShouldDoNothingWhenIdExists() {
-        Assertions.assertDoesNotThrow(() -> {
+        Assertions.assertDoesNotThrow(() -> { // não lança nem uma exceção
             service.delete(existingId);
         });
 
         // verificando se foi deletado no BD
+        // times o numeros de vezes q foi chamado
         Mockito.verify(repository, Mockito.times(1)).deleteById(existingId);
     }
 }

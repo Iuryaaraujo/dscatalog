@@ -2,6 +2,7 @@ package com.devsuperior.dscatalog.resources.exceptione;
 
 import java.time.Instant;
 
+// Erro padrão Que esta no POSTMAN
 public class StandardError {
 
     private Instant timestamp;

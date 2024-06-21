@@ -25,13 +25,13 @@ public class CategoryService {
     @Autowired
     private CategoryRepository repository;
 
-    @Transactional(readOnly = true)
-    public Page<CategoryDTO> findAllPaged(Pageable pageable) {
-        Page<Category> list = (Page<Category>) repository.findAll(pageable);
-        return list.map(x -> new CategoryDTO(x));
+    @Transactional(readOnly = true) // somente leitura
+    public List<CategoryDTO> findAll() {
+        List<Category> list = repository.findAll();
+        return list.stream().map(x -> new CategoryDTO(x)).toList();
     }
 
-    @Transactional(readOnly = true) // somente leitura
+    @Transactional(readOnly = true)
     public CategoryDTO findById(Long id) {
         Optional<Category> obj = repository.findById(id);
         Category entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entidade não encontrada"));
@@ -41,13 +41,10 @@ public class CategoryService {
 
     @Transactional
     public CategoryDTO insert(CategoryDTO dto) {
-        Category entity = new Category(); // convertendo a intidade para Categorydto
-        // não coloca o SetId porque quando inserir
-        // um valor é valor null, quem vai inserir é o
-        // BD Automaticamente, sé tive outros valores pode colocar menos o id
+        Category entity = new Category();
         entity.setName(dto.getName());
-        entity = repository.save(entity);// salvando no BD
-        return new CategoryDTO(entity); // Salvando no DTO
+        entity = repository.save(entity);
+        return new CategoryDTO(entity);
     }
 
     @Transactional
@@ -73,8 +70,6 @@ public class CategoryService {
         }
         catch (DataIntegrityViolationException e) {
             throw new DatabaseException("Falha de integridade referencial");
-            // estou lançando essa exceção caso aconteca de exclui a categoria
-            // não posso apagar a categorya dos produtos, mas posso apagar os produtos
         }
     }
 

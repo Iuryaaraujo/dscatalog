@@ -30,6 +30,8 @@ public class ProductDTO {
     @PastOrPresent(message = "A data do produto não poder ser futura")
     private Instant date;
 
+    // ManyToMany, me informa que meu Produto vai aceitar uma lista de Categorias
+    // Não colocor no construtor
     private List<CategoryDTO> categories = new ArrayList<>();
 
     public ProductDTO() {
@@ -52,7 +54,9 @@ public class ProductDTO {
         date = entity.getDate();
     }
 
-    // Vai ser contruido com os dados basicos e com a list de categorias
+    // Vai ser contruido com os dados básicos e com a list de categorias
+    // Uma forma de instância o productDTO com o CategoryDTO
+    // usado no ProductService no metódo findById
     public ProductDTO(Product entity, Set<Category> categories) {
         this(entity);
         categories.forEach(category -> this.categories.add(new CategoryDTO(category)));

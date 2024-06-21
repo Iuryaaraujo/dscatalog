@@ -1,6 +1,7 @@
 package com.devsuperior.dscatalog.resources.exceptione;
 
 import com.devsuperior.dscatalog.services.exceptions.DatabaseException;
+import com.devsuperior.dscatalog.services.exceptions.EmailException;
 import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.time.Instant;
 
 @ControllerAdvice // Essa anotetion vai permite que intecepte algumas exceções da camada controller
+// Manipulador de Exceção de Recurso
 public class ResouceExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
@@ -21,7 +23,7 @@ public class ResouceExceptionHandler {
         error.setTimestamp(Instant.now()); // now Horário atual
         error.setStatus(HttpStatus.NOT_FOUND.value()); // 404 // value é para pegar o numero inteiro
         error.setError("Recurso não encontrado");
-        error.setMessage(e.getMessage());
+        error.setMessage(e.getMessage()); // pegara messagem que tá no CategoryService
         error.setPath(request.getRequestURI());
         return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
@@ -51,6 +53,18 @@ public class ResouceExceptionHandler {
             error.addError(f.getField(), f.getDefaultMessage());
         }
 
+        return  ResponseEntity.status(status).body(error);
+    }
+
+    @ExceptionHandler(EmailException.class)
+    public ResponseEntity<StandardError> email(EmailException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError error = new StandardError();
+        error.setTimestamp(Instant.now());
+        error.setStatus(status.value());
+        error.setError("Email exception");
+        error.setMessage(e.getMessage());
+        error.setPath(request.getRequestURI());
         return  ResponseEntity.status(status).body(error);
     }
 }

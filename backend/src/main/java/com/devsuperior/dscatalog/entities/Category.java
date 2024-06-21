@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
-public class Category {
+public class  Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,11 +17,14 @@ public class Category {
 
     // Sempre que for usa uma data coloca esse anotetion
     // TIMESTAMP SEM FUSO HORÁRIO
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    // Instante que esse registro foi criado
+    // coloca só os get
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE") // TIMESTAMP SEM FUSO HORÁRIO
     private Instant createdAt;
 
     // Sempre que for usa uma data coloca esse anotetion
     // TIMESTAMP SEM FUSO HORÁRIO
+    // Instante que esse registro foi Atualizado
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant updatedAt;
 

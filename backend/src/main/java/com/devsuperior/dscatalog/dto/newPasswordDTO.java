@@ -1,27 +1,37 @@
 package com.devsuperior.dscatalog.dto;
 
-import com.devsuperior.dscatalog.services.validation.UserInsertValid;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-@UserInsertValid
-public class UserInsertDTO extends UserDTO {
+public class newPasswordDTO {
+
+    @NotBlank(message = "Campo obrigatório")
+    private String token;
 
     @NotBlank(message = "Campo obrigatório")
     @Size(min = 8, message = "Deve ter no mínimo 8 caracteres")
     private String password;
 
-    UserInsertDTO() {
-        super();
+    public newPasswordDTO() {
     }
 
-    @Override
+    public newPasswordDTO(String token, String password) {
+        this.token = token;
+        this.password = password;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public String getPassword() {
         return password;
     }
 
-    @Override
     public void setPassword(String password) {
         this.password = password;
     }
