@@ -1,6 +1,7 @@
 package com.devsuperior.dscatalog.resources.exceptione;
 
 // Mensagem de campo
+// para tratar as validações
 public class FieldMessage {
 
     private String fieldName;

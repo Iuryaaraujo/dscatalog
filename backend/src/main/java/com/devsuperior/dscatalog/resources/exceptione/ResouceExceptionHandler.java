@@ -39,18 +39,19 @@ public class ResouceExceptionHandler {
         return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
+    // tratando minhas exceção de validação
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ValidationError> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
+    public ResponseEntity<ValidationError> validacao(MethodArgumentNotValidException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY; // codigo 422 ENTIDADE IMPROCESSÁVEL
         ValidationError error = new ValidationError();
         error.setTimestamp(Instant.now()); // now Horário atual
         error.setStatus(status.value());
-        error.setError("Validation exception");
+        error.setError("Exceção de validação");
         error.setMessage(e.getMessage());
         error.setPath(request.getRequestURI());
 
         for (FieldError f : e.getBindingResult().getFieldErrors()) {
-            error.addError(f.getField(), f.getDefaultMessage());
+            error.addError(f.getField(), f.getDefaultMessage()); // pegar o nome do erro e a messagem do erro
         }
 
         return  ResponseEntity.status(status).body(error);

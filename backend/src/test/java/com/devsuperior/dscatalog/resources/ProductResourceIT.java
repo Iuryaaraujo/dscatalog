@@ -51,6 +51,7 @@ public class ProductResourceIT {
         bearerToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
     }
 
+    // findAll deve retornar a página classificada ao classificar por nome
     @Test
     public void findAllShouldReturnSortedPageWhenSortByName() throws Exception {
 

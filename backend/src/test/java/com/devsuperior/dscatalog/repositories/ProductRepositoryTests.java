@@ -28,6 +28,7 @@ public class ProductRepositoryTests {
         countTotalProducts = 25L;
     }
 
+    // Teste Unitário
     // salvar deve persistir com incremento automático quando o ID é nulo
     @Test
     public void saveShouldPersistWithAutoincrementWhenIdIsNull() {

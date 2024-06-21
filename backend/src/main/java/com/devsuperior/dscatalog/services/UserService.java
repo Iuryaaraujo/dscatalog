@@ -60,7 +60,8 @@ public class UserService implements UserDetailsService {
         Optional<User> obj = repository.findById(id);
         User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entidade não encontrada"));
 
-        // vai passa só o entity porque no user ja carrega com lista roles
+        // vai passa só o User entity porque no user ja carrega com lista roles juntos
+        // entity.getRoles().forEach(roles -> this.roles.add(new RoleDTO(roles)));
         return new UserDTO(entity);
     }
 
@@ -73,7 +74,7 @@ public class UserService implements UserDetailsService {
         Role role = roleRepository.findByAuthority("ROLE_OPERATOR");
         entity.getRoles().add(role);
 
-        entity.setPassword(passwordEncoder.encode(dto.getPassword())); // deixando a senha com segurança
+        entity.setPassword(passwordEncoder.encode(dto.getPassword())); // inserir o usuario com senha criptografada
         entity = repository.save(entity);// salvando no BD
         return new UserDTO(entity); // retorna o DTO Salvo
     }

@@ -20,7 +20,7 @@ public class User implements UserDetails {
     private String email;
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER) // Usuario ja vem os roles junto com ele
+    @ManyToMany(fetch = FetchType.EAGER) // Força o Usuario vim com os roles junto com ele
     @JoinTable(name = "tb_user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
