@@ -87,7 +87,10 @@ public class ProductService {
     @Transactional(readOnly = true)
     public Page<ProductDTO> findAllPaged(String categoryId, String name, Pageable pageable) {
 
+        // convertendo em List de ‘String’ para "Long"
         List<Long> categoryIds = new ArrayList<>();
+        // Se categoryId for diferente do valor padrao que é zero,
+        // retorna uma list Long
         if (!"0".equals(categoryId)) {
             categoryIds = Arrays.asList(categoryId.split(",")).stream().map(Long::parseLong).toList();
         }
@@ -95,7 +98,9 @@ public class ProductService {
         Page<ProductProjection> page = repository.searchProducts(categoryIds, name.trim(), pageable);
         List<Long> productIds = page.map(x -> x.getId()).toList();
 
+        // pegando a lista desordenada
         List<Product> entities = repository.searchProductsWithCategories(productIds);
+        // gerando uma nova list ordenada
         entities = (List<Product>) Utils.replace(page.getContent(), entities);
         List<ProductDTO> dtos = entities.stream().map(p -> new ProductDTO(p, p.getCategories())).toList();
 

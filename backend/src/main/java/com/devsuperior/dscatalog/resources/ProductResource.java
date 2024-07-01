@@ -33,22 +33,22 @@ public class ProductResource {
     // Com paginação
     // recuperar por id
     // È opcional o PAGE, entao usa @RequestParam
-//    @GetMapping
-//    public ResponseEntity<Page<ProductDTO>> findAllPaged(
-//            @RequestParam(value = "categoryId", defaultValue = "0") String categoryId,
-//            @RequestParam(value = "name", defaultValue = "") String name,
-//            Pageable pageable) {
-//        Page<ProductDTO> list = service.findAllPaged(categoryId, name, pageable);
-//        return ResponseEntity.ok().body(list);
-//    }
+    @GetMapping
+    public ResponseEntity<Page<ProductDTO>> findAllPaged(
+            @RequestParam(value = "categoryId", defaultValue = "0") String categoryId,
+            @RequestParam(value = "name", defaultValue = "") String name,
+            Pageable pageable) {
+        Page<ProductDTO> list = service.findAllPaged(categoryId, name, pageable);
+        return ResponseEntity.ok().body(list);
+    }
 
     // Com paginação é melhor dessa forma
-    @GetMapping
-    public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable) {
-        // PARAMETROS: page, size, sort
-        Page<ProductDTO> page = service.findAllPaged(pageable);
-        return ResponseEntity.ok().body(page);
-    }
+//    @GetMapping
+//    public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable) {
+//        // PARAMETROS: page, size, sort
+//        Page<ProductDTO> page = service.findAllPaged(pageable);
+//        return ResponseEntity.ok().body(page);
+//    }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {

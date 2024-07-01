@@ -37,6 +37,7 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Dependência Postgresql-->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -49,12 +50,13 @@
 			</exclusions>
 		</dependency>
 
+		<!-- Dependência validação-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
-		<!--		para criptografar senha-->
+		<!-- Dependência Spring Security-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -66,6 +68,7 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Dependência Authorizarion server -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-oauth2-authorization-server</artifactId>

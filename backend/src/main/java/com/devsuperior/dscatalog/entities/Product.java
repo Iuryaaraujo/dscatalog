@@ -11,6 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "tb_product")
 public class Product implements IdProjection<Long> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,6 +45,7 @@ public class Product implements IdProjection<Long> {
         this.imgUrl = imgUrl;
     }
 
+    @Override // Para o compilador saber que está implementando a interface IdProjection<E>
     public Long getId() {
         return id;
     }

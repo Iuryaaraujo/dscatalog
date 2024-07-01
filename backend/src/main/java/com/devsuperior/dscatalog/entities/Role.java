@@ -29,7 +29,7 @@ public class Role implements GrantedAuthority {
         this.id = id;
     }
 
-    @Override
+    @Override // avisando para meu compilado que estou implementando o metódo da interface GrantedAuthority
     public String getAuthority() {
         return authority;
     }

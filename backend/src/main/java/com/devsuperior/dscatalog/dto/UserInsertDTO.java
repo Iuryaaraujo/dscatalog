@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-@UserInsertValid
+@UserInsertValid // a nossa validation, verifica se o email já existe no DB
 public class UserInsertDTO extends UserDTO {
 
     @NotBlank(message = "Campo obrigatório")
@@ -16,12 +16,12 @@ public class UserInsertDTO extends UserDTO {
         super();
     }
 
-    @Override
+
     public String getPassword() {
         return password;
     }
 
-    @Override
+
     public void setPassword(String password) {
         this.password = password;
     }

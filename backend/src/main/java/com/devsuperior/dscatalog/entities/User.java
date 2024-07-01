@@ -20,7 +20,7 @@ public class User implements UserDetails {
     private String email;
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER) // Força o Usuario vim com os roles junto com ele
+   @ManyToMany(fetch = FetchType.EAGER) // Força o Usuario vim com os roles com ele
     @JoinTable(name = "tb_user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -86,7 +86,7 @@ public class User implements UserDetails {
         roles.add(role);
     }
 
-    // Método para testa se meu usuario possui um determinado Role
+    // Método para testa se o meu usuario possui um determinado Role
     public boolean hasRole(String roleName) {
         for (Role role : roles) {
             if (role.getAuthority().equals(roleName)) {
@@ -109,6 +109,7 @@ public class User implements UserDetails {
         return Objects.hashCode(id);
     }
 
+    // todos os metódos da interface UserDetails
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
@@ -116,9 +117,10 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return email; // Meu Usuário é o email porque ele é único no meus bd
     }
 
+    // Retorna verdadeiro em tudo
     @Override
     public boolean isAccountNonExpired() {
         return true;

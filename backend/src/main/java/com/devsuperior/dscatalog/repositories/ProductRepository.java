@@ -32,8 +32,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 			AND (LOWER(tb_product.name) LIKE LOWER(CONCAT('%',:name,'%')))
 			) AS tb_result
 			""")
+	// PESQUISA DE PRODUTOS
 	Page<ProductProjection> searchProducts(List<Long> categoryIds, String name, Pageable pageable);
 
+	// Consulta JPQL, Lista de produtos com as categorias
+	// JOIN FETCH é a clausa que tras os obj associado
 	@Query("SELECT obj FROM Product obj JOIN FETCH obj.categories WHERE obj.id IN :productIds")
 	List<Product> searchProductsWithCategories(List<Long> productIds);
 }
